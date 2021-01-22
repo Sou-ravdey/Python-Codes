@@ -36,6 +36,8 @@ def submit():
         a = e2.get()
         dict_n['Name'].append(n)
         dict_a['Amount'].append(a)
+        e1.delete(0,END)
+        e2.delete(0,END)
         amount = amount-init1
     else:
         print("The amount is too high")
