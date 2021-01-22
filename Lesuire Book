@@ -24,11 +24,11 @@ e2 = Entry(fr2, text='8')
 e2.pack(side='right')
 
 
-
+ amount=10000000
 
 def submit():
 
-    amount=10000000
+    global amount
     init = e2.get()
     init1=int(init)
     if init1 <= amount:
