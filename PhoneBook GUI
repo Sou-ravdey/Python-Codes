@@ -1,0 +1,112 @@
+from tkinter import *
+from tkinter.ttk import*
+
+window=Tk()
+window.title('PhoneBook')
+
+dict_ph_book={}
+
+
+#Creating ADD to contacts window
+def add_to_contact():
+    new_window =  Toplevel(window)
+
+    fr1 = Frame(new_window)
+    fr1.pack()
+    fr2 = Frame(new_window)
+    fr2.pack()
+
+    new_window.title('Add Contacts')
+
+    l1=Label(fr1,text='Name')
+    l1.pack(side='left')
+
+    e1=Entry(fr1,text='25')
+    e1.pack(side='right')
+
+    l2=Label(fr2,text='Number')
+    l2.pack(side='left')
+
+    e2=Entry(fr2,text='10')
+    e2.pack(side='right')
+
+    #Function to add the contact
+    def add():
+        na=e1.get()
+        nu=e2.get()
+        dict_ph_book[na]=nu
+        e1.delete(0,END)
+        e2.delete(0,END)
+
+        print(dict_ph_book)
+
+    bu2=Button(new_window,text='Add',command=add)
+    bu2.pack()
+
+#Creating Search Window
+
+def search_contact():
+
+    new_window_2 = Toplevel(window)
+
+    fr3 = Frame(new_window_2)
+    fr3.pack()
+    fr4 = Frame(new_window_2)
+    fr4.pack()
+
+    new_window_2.title('Search Directory')
+
+    l3=Label(fr3,text='Name')
+    l3.pack(side='left')
+
+    e3=Entry(fr3,text='25')
+    e3.pack(side='right')
+
+    l4 = Label(fr4, text='Number')
+    l4.pack(side='left')
+
+    e4 = Entry(fr4, text='10')
+    e4.pack(side='right')
+
+    #find function
+    def find():
+        na1=e3.get()
+        nu1=e4.get()
+        if nu1 !='':
+            nu2=int(nu1)
+        else:
+            pass
+        e3.delete(0, END)
+        e4.delete(0, END)
+
+        if na1 in dict_ph_book.keys():
+            print(f'Name:{na1} Number:{dict_ph_book[na1]}')
+
+        elif nu1 in dict_ph_book.values():
+
+            def get_key(val):
+                for key, value in dict_ph_book.items():
+                    if value==val:
+                        return key
+
+            k=(get_key(nu1))
+            print(f'Name:{k} Number:{dict_ph_book[k]}')
+            #value=[name for name, number in dict_ph_book.items() if number == nu1 ]
+            #print(value)
+        else:
+            print('contact not found')
+
+    #Creation of Find button
+    co2=Button(new_window_2,text='Find',command=find)
+    co2.pack()
+
+
+#Creation of Search button
+bu1=Button(window,text='Search',command=search_contact)
+bu1.pack()
+
+#Creatiion of Add contact button
+co1=Button(window,text='Add Contact',command= add_to_contact)
+co1.pack()
+
+window.mainloop()
